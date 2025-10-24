@@ -40,10 +40,12 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto text-end">
-                    <a class="nav-link" href="{% url 'index' %}">Hem</a>
-                    <a class="nav-link" href="{% url 'library' %}">Bibliotek</a>
-                    <a class="nav-link" href="{% url 'about' %}">Om oss</a>
-
+                    <a class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}"
+                        href="{% url 'index' %}">Hem</a>
+                    <a class="nav-link {% if request.resolver_match.url_name == 'library' %}active{% endif %}"
+                        href="{% url 'library' %}">Bibliotek</a>
+                    <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}"
+                        href="{% url 'about' %}">Om oss</a>
                 </div>
             </div>
         </div>
