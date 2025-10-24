@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}MassGrosorna | Library{% endblock %}
+
+{% block content %}
+
+<!-- Header -->
+<header id="header-2" class="container section">
+    <div class="row">
+        <div id="header-text" class="col-12 text-center">
+            <h1 class="display-4">Bibliotek</h1>
+            <h2 class="my-2">Sagor från Landet vid Regnbågens Slut</h2>
+            <p class="mt-4">Detta är en serie barnböcker som vänder sig till barn i åldrarna 3 till 6 år, och som
+                tar upp viktiga
+                samhällsfrågor på ett roligt och lärorikt sätt. Samtliga böcker utspelar sig i samma fiktiva land,
+                men är fristående från varandra.</p>
+        </div>
+    </div>
+</header>
+
+<!-- Main element to hold all key sections of the library page. -->
+<main>
+    <!-- Library cards section -->
+    <section class="container section">
+        <div id="library" class="row justify-content-center mb-2">
+            <div class="col-md-6 col-lg-4 card">
+                <!-- Bootstrap Carousel -->
+                <div id="card-carousel-1" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{% static '/images/massgrosorna-book1-preview-01.png' %}" class="d-block w-100"
+                                alt="Bam och den Stormiga Natten book cover">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static '/images/massgrosorna-book1-preview-02.png' %}" class="d-block w-100"
+                                alt="Bam och den Stormiga Natten preview 1">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static '/images/massgrosorna-book1-preview-03.png' %}" class="d-block w-100"
+                                alt="Bam och den Stormiga Natten preview 2">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#card-carousel-1"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#card-carousel-1"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body text-center">
+                    <h3 class="card-title sub-heading-color">Bam och den Stormiga Natten</h3>
+                    <p class="card-text">En natt kommer en hemsk storm till landet. Alla filurer
+                        som bor här gömmer sig långt in i sina stugor.
+                        Så lägger plötsligt en främmande båt till, och en okänd
+                        filur kliver upp på däck. Filuren ropar på hjälp, men ingen
+                        vågar sig ut. Då gör en liten, liten filur något av det modigaste en filur
+                        kan göra. Hen sätter på sig sina stövlar och sin varmaste
+                        kappa, öppnar sin ytterdörr, och kliver ut i natten.</p>
+                </div>
+            </div>
+            <div class="col-4 card">
+                <!-- Bootstrap Carousel -->
+                <div id="card-carousel-2" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{% static '/images/massgrosorna-book2-preview-01.png' %}" class="d-block w-100"
+                                alt="Bam och den Stora Vågen book cover">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static '/images/massgrosorna-book2-preview-02.png' %}" class="d-block w-100"
+                                alt="Bam och den Stora Vågen preview 1">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static '/images/massgrosorna-book2-preview-03.png' %}" class="d-block w-100"
+                                alt="Bam och den Stora Vågen preview 2">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#card-carousel-2"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#card-carousel-2"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body text-center">
+                    <h3 class="card-title sub-heading-color">Bam och den Stora Vågen</h3>
+                    <p class="card-text">På en strand i Landet vid Regnbågens Slut bor
+                        filuren Vim i ett mysigt litet hus hen själv har byggt.
+                        Här trivs Vim bra, och hen njuter av sin tillvaro.
+                        Men så en dag händer någonting oväntat. En stor
+                        våg väller in över stranden och sköljer bort filurens
+                        hus. Kvar finns den förtvivlade Vim, fylld av sorg
+                        och saknad, med något som känns som en tung
+                        sten i bröstet. Det är besvärligt att bära stenen själv,
+                        men kanske finns det någon i staden som kan hjälpa till?
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Button to trigger the modal -->
+        <div id="button-modal" class="text-center mb-5">
+            <button type="button" class="btn custom-button-filled" data-bs-toggle="modal" data-bs-target="#orderModal">
+                Sugen på att beställa?
+            </button>
+        </div>
+    </section>
+    <!-- Modal -->
+    <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orderModalLabel">Beställa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="col-12 text-center">
+                    <p class="modal-text">Inom Sverige kan du beställa böckerna genom att
+                        Swisha till 0768189831 och nedan skriva in
+                        adressen vi ska leverera boken till, samt
+                        vilken/vilka av böckerna du vill köpa. En bok
+                        inklusive porto kostar 169kr, två stycken inklusive
+                        porto 249kr.</p>
+                </div>
+                <div class="modal-body">
+                    <!-- Form inside the modal -->
+                    <form action="success.html" method="GET">
+                        <div>
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <div class="form-outline mb-2">
+                                        <input type="text" class="form-control" id="full-name" required>
+                                        <label class="form-label" for="full-name">Ditt Namn</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Text input -->
+                            <div class="form-outline mb-2">
+                                <input id="company" type="text" class="form-control" />
+                                <label class="form-label" for="company">Företagsnamn</label>
+                            </div>
+
+                            <!-- Text input -->
+                            <div class="form-outline mb-2">
+                                <input id="address" type="text" class="form-control" required />
+                                <label class="form-label" for="address">Adress</label>
+                            </div>
+
+                            <!-- Email input -->
+                            <div class="form-outline mb-2">
+                                <input id="email" type="email" class="form-control" required />
+                                <label class="form-label" for="email">E-post</label>
+                            </div>
+
+                            <!-- Number input -->
+                            <div class="form-outline mb-2">
+                                <input id="telephone" type="number" class="form-control" />
+                                <label class="form-label" for="telephone">Telefonnummer</label>
+                            </div>
+
+                            <!-- Message input -->
+                            <div class="form-outline mb-2">
+                                <textarea id="message" class="form-control" rows="4" required></textarea>
+                                <label class="form-label" for="message">Ditt meddelande</label>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Stäng</button>
+                                <button type="submit" class="btn custom-button-filled">Skicka</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
