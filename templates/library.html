@@ -25,92 +25,45 @@
     <!-- Library cards section -->
     <section class="container section">
         <div id="library" class="row justify-content-center mb-2">
-            <div class="col-md-6 col-lg-4 card">
-                <!-- Bootstrap Carousel -->
-                <div id="card-carousel-1" class="carousel slide" data-bs-ride="carousel">
+            {% for product in products %}
+            <div class="col-md-6 col-lg-4 card mb-4">
+                <div id="card-carousel-{{ forloop.counter }}" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
+                        {% if product.image1 %}
                         <div class="carousel-item active">
-                            <img src="{% static '/images/massgrosorna-book1-preview-01.png' %}" class="d-block w-100"
-                                alt="Bam och den Stormiga Natten book cover">
+                            <img src="{{ product.image1.url }}" class="d-block w-100" alt="{{ product.title }}">
                         </div>
+                        {% endif %}
+                        {% if product.image2 %}
                         <div class="carousel-item">
-                            <img src="{% static '/images/massgrosorna-book1-preview-02.png' %}" class="d-block w-100"
-                                alt="Bam och den Stormiga Natten preview 1">
+                            <img src="{{ product.image2.url }}" class="d-block w-100" alt="{{ product.title }}">
                         </div>
+                        {% endif %}
+                        {% if product.image3 %}
                         <div class="carousel-item">
-                            <img src="{% static '/images/massgrosorna-book1-preview-03.png' %}" class="d-block w-100"
-                                alt="Bam och den Stormiga Natten preview 2">
+                            <img src="{{ product.image3.url }}" class="d-block w-100" alt="{{ product.title }}">
                         </div>
+                        {% endif %}
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#card-carousel-1"
-                        data-bs-slide="prev">
+                    <button class="carousel-control-prev" type="button"
+                        data-bs-target="#card-carousel-{{ forloop.counter }}" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#card-carousel-1"
-                        data-bs-slide="next">
+                    <button class="carousel-control-next" type="button"
+                        data-bs-target="#card-carousel-{{ forloop.counter }}" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
-                <!-- Card Body -->
                 <div class="card-body text-center">
-                    <h3 class="card-title sub-heading-color">Bam och den Stormiga Natten</h3>
-                    <p class="card-text">En natt kommer en hemsk storm till landet. Alla filurer
-                        som bor här gömmer sig långt in i sina stugor.
-                        Så lägger plötsligt en främmande båt till, och en okänd
-                        filur kliver upp på däck. Filuren ropar på hjälp, men ingen
-                        vågar sig ut. Då gör en liten, liten filur något av det modigaste en filur
-                        kan göra. Hen sätter på sig sina stövlar och sin varmaste
-                        kappa, öppnar sin ytterdörr, och kliver ut i natten.</p>
+                    <h3 class="card-title sub-heading-color">{{ product.title }}</h3>
+                    <p class="card-text">{{ product.description }}</p>
                 </div>
             </div>
-            <div class="col-4 card">
-                <!-- Bootstrap Carousel -->
-                <div id="card-carousel-2" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="{% static '/images/massgrosorna-book2-preview-01.png' %}" class="d-block w-100"
-                                alt="Bam och den Stora Vågen book cover">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{% static '/images/massgrosorna-book2-preview-02.png' %}" class="d-block w-100"
-                                alt="Bam och den Stora Vågen preview 1">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{% static '/images/massgrosorna-book2-preview-03.png' %}" class="d-block w-100"
-                                alt="Bam och den Stora Vågen preview 2">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#card-carousel-2"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#card-carousel-2"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body text-center">
-                    <h3 class="card-title sub-heading-color">Bam och den Stora Vågen</h3>
-                    <p class="card-text">På en strand i Landet vid Regnbågens Slut bor
-                        filuren Vim i ett mysigt litet hus hen själv har byggt.
-                        Här trivs Vim bra, och hen njuter av sin tillvaro.
-                        Men så en dag händer någonting oväntat. En stor
-                        våg väller in över stranden och sköljer bort filurens
-                        hus. Kvar finns den förtvivlade Vim, fylld av sorg
-                        och saknad, med något som känns som en tung
-                        sten i bröstet. Det är besvärligt att bära stenen själv,
-                        men kanske finns det någon i staden som kan hjälpa till?
-                    </p>
-                </div>
-            </div>
+            {% endfor %}
         </div>
 
-        <!-- Button to trigger the modal -->
         <div id="button-modal" class="text-center mb-5">
             <button type="button" class="btn custom-button-filled" data-bs-toggle="modal" data-bs-target="#orderModal">
                 Sugen på att beställa?
