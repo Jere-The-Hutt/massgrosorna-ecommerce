@@ -46,6 +46,8 @@
                         href="{% url 'library' %}">Bibliotek</a>
                     <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}"
                         href="{% url 'about' %}">Om oss</a>
+                    <a class="nav-link {% if request.resolver_match.url_name == 'cart' %}active{% endif %}"
+                        href="{% url 'cart' %}"><i class="fa-solid fa-cart-shopping"></i></a>
                 </div>
             </div>
         </div>
