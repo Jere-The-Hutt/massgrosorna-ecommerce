@@ -18,34 +18,45 @@
 <main>
     <section class="container section">
         {% if cart_items %}
-        <div id="cart" class="row justify-content-center m-4">
-            {% for item in cart_items %}
-            <div class="col-md-6 col-lg-4 card m-4">
-                <div id="cart-card-carousel-{{ forloop.counter }}" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        {% if item.product.image1 %}
-                        <div class="carousel-item active mt-2">
-                            <img src="{{ item.product.image1.url }}" class="d-block w-100" alt="{{ item.product.title }}">
-                        </div>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="card-body text-center">
-                    <h3 class="card-title sub-heading-color">{{ item.product.title }}</h3>
-                    <p class="fw-bold">Antal: {{ item.quantity }}</p>
-                    <p class="fw-bold">Subtotal: {{ item.subtotal }} kr</p>
-                    <form action="{% url 'cart_remove' item.product.id %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-outline-danger mt-2">Ta bort</button>
-                    </form>
-                </div>
+        <div class="table-responsive">
+            <table class="table table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th scope="col">Produkt</th>
+                        <th scope="col">Pris</th>
+                        <th scope="col">Antal</th>
+                        <th scope="col">Subtotal</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                {% if item.product.image1 %}
+                                <img src="{{ item.product.image1.url }}" alt="{{ item.product.title }}" style="width: 70px; height: auto; margin-right: 15px; border-radius: 6px;">
+                                {% endif %}
+                                <span class="fw-bold">{{ item.product.title }}</span>
+                            </div>
+                        </td>
+                        <td>{{ item.product.price }} kr</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.subtotal }} kr</td>
+                        <td>
+                            <form action="{% url 'cart_remove' item.product.id %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-danger btn-sm">Ta bort</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="text-end mt-4">
+                <h4 class="fw-bold">Total: {{ total }} kr</h4>
+                <a href="{% url 'checkout' %}" class="btn custom-button-filled mt-3">Gå till kassan</a>
             </div>
-            {% endfor %}
-        </div>
-
-        <div class="text-center mb-5">
-            <h4>Total: {{ total }} kr</h4>
-            <a href="{% url 'checkout' %}" class="btn custom-button-filled mt-3">Gå till kassan</a>
         </div>
         {% else %}
         <div class="text-center mt-5">
