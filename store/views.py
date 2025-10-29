@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .cart import Cart
+from decimal import Decimal
 from .models import Product
 
 
@@ -31,15 +32,26 @@ def success(request):
 def cart_view(request):
     cart = request.session.get('cart', {})
     products = []
-    total = 0
-    for product_id, quantity in cart.items():
-        product = get_object_or_404(Product, id=product_id)
+    total = Decimal('0.00')
+
+    for product_id_str, item_data in cart.items():
+        product = get_object_or_404(Product, id=int(product_id_str))
+
+        if isinstance(item_data, dict):
+            quantity = item_data.get('quantity', 0)
+            price = Decimal(str(item_data.get('price', product.price)))
+        else:
+            quantity = int(item_data)
+            price = product.price
+
+        subtotal = price * quantity
+        total += subtotal
+
         products.append({
             'product': product,
             'quantity': quantity,
-            'subtotal': product.price * quantity
+            'subtotal': subtotal
         })
-        total += product.price * quantity
 
     return render(request, 'cart.html', {'cart_items': products, 'total': total})
 
@@ -89,3 +101,43 @@ def checkout(request):
         'store/checkout.html',
         {'cart_items': products, 'total': total}
         )
+
+
+def cart_increase(request, product_id):
+    cart = request.session.get('cart', {})
+    product = get_object_or_404(Product, id=product_id)
+    product_id_str = str(product_id)
+
+    if isinstance(cart.get(product_id_str), int):
+        cart[product_id_str] = {
+            'quantity': cart[product_id_str],
+            'price': float(product.price)
+        }
+
+    if product_id_str in cart:
+        cart[product_id_str]['quantity'] += 1
+    else:
+        cart[product_id_str] = {'quantity': 1, 'price': float(product.price)}
+
+    request.session['cart'] = cart
+    return redirect('cart')
+
+
+def cart_decrease(request, product_id):
+    cart = request.session.get('cart', {})
+    product = get_object_or_404(Product, id=product_id)
+    product_id_str = str(product_id)
+
+    if isinstance(cart.get(product_id_str), int):
+        cart[product_id_str] = {
+            'quantity': cart[product_id_str],
+            'price': float(product.price)
+        }
+
+    if product_id_str in cart:
+        cart[product_id_str]['quantity'] -= 1
+        if cart[product_id_str]['quantity'] <= 0:
+            del cart[product_id_str]
+
+    request.session['cart'] = cart
+    return redirect('cart')
