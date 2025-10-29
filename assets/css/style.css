@@ -246,6 +246,10 @@ th {
     padding: 20px;
 }
 
+.toast-container {
+    top: 60px;
+}
+
 /* Media Queries */
 @media screen and (max-width: 768px) {
     #header .logo {

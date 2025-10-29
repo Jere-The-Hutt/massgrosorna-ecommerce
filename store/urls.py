@@ -7,6 +7,8 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('library/', views.library, name='library'),
     path('success/', views.success, name='success'),
+    path('footer-contact/', views.footer_contact, name='footer_contact'),
+
 
     # Product detail page
     path(

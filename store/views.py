@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .cart import Cart
 from decimal import Decimal
 from .models import Product
+from django.core.mail import send_mail
+from django.shortcuts import redirect
+from django.contrib import messages
 
 
 def index(request):
@@ -60,9 +63,25 @@ def cart_view(request):
 def add_to_cart(request, product_id):
     if request.method == 'POST':
         cart = request.session.get('cart', {})
-        cart[str(product_id)] = cart.get(str(product_id), 0) + 1
-    request.session['cart'] = cart
-    return redirect('library')  # Redirect back to library page or previous page
+        product = get_object_or_404(Product, id=product_id)
+        product_id_str = str(product_id)
+
+        # Read quantity from form, default to 1
+        try:
+            quantity = int(request.POST.get('quantity', 1))
+            if quantity < 1:
+                quantity = 1
+        except ValueError:
+            quantity = 1
+
+        if product_id_str in cart:
+            cart[product_id_str]['quantity'] += quantity
+        else:
+            cart[product_id_str] = {'quantity': quantity, 'price': float(product.price)}
+
+        request.session['cart'] = cart
+
+    return redirect('library')
 
 
 def remove_from_cart(request, product_id):
@@ -141,3 +160,22 @@ def cart_decrease(request, product_id):
 
     request.session['cart'] = cart
     return redirect('cart')
+
+
+def footer_contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+
+        # Send the email
+        send_mail(
+            subject=f'New message from {name}',
+            message=message,
+            from_email=email,
+            recipient_list=['your@email.com'],
+            fail_silently=False,
+        )
+
+        messages.success(request, 'Tack! Ditt meddelande har skickats.')
+        return redirect(request.META.get('HTTP_REFERER', '/'))

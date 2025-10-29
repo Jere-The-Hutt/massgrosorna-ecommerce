@@ -54,6 +54,22 @@
     </nav>
     <!-- Main element to hold all key sections of the home page. It is not part of the grid structure. -->
     <main>
+        {% if messages %}
+        <div class="toast-container position-fixed start-50 translate-middle-x top-6 p-3" style="z-index: 1055;">
+            {% for message in messages %}
+            <div class="toast align-items-center text-bg-success border-0 show" role="alert" aria-live="assertive"
+                aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        {{ message }}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
         {% block content %}
         <!-- Individual page content will go here -->
         {% endblock %}
@@ -84,7 +100,8 @@
                 </div>
                 <!-- Name & Email Fields (Top on small screens) -->
                 <div class="col-12 col-md-4 text-center mt-3">
-                    <form action="{% url 'success' %}" method="GET">
+                    <form action="{% url 'footer_contact' %}" method="POST">
+                        {% csrf_token %}
                         <div class="row justify-content-center">
                             <div class="col-10 col-md-10 mb-3">
                                 <input class="form-control" id="name" name="name" type="text" required>
