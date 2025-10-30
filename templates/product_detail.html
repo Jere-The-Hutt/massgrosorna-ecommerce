@@ -51,12 +51,15 @@
                 <!-- Card Body -->
                 <div class="card-body text-center">
                     <h3 class="card-title sub-heading-color">{{ product.title }}</h3>
+                    <p><strong>Av:</strong> {{ product.author }}</p>
                     <p class="card-text">{{ product.description }}</p>
                     <p class="card-text"><strong>Pris: </strong>{{ product.price }} kr</p>
 
                     <!-- Add to cart form -->
-                    <form action="{% url 'add_to_cart' product.id %}" method="post">
+                    <form action="{% url 'add_to_cart' product.id %}" method="post" class="d-flex justify-content-center mt-2">
                         {% csrf_token %}
+                        <input type="number" name="quantity" value="1" min="1" class="form-control me-2"
+                            style="width: 70px;">
                         <button type="submit" class="btn custom-button-filled mt-2">Lägg till i kundvagn</button>
                     </form>
                 </div>

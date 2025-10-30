@@ -1,9 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .cart import Cart
 from decimal import Decimal
 from .models import Product
 from django.core.mail import send_mail
-from django.shortcuts import redirect
 from django.contrib import messages
 
 

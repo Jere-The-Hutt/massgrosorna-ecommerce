@@ -19,6 +19,7 @@ class Product(models.Model):
         blank=True
         )
     title = models.CharField(max_length=200)
+    author = models.CharField(max_length=200, blank=True, null=True)
     description = models.TextField()
     price = models.DecimalField(
         max_digits=6,
