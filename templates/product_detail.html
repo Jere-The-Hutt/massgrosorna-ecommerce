@@ -6,10 +6,16 @@
 {% block content %}
 
 <!-- Header -->
-<header id="header-2" class="container section">
+<a href="{% url 'library' %}" class="btn fixed-return btn-lg">
+    <i class="fa-solid fa-arrow-left">
+        Tillbaka
+    </i>
+</a>
+<header id="header-2" class="container section position-relative">
     <div class="row">
         <div id="header-text" class="col-12 text-center">
             <h1 class="display-4">{{ product.title }}</h1>
+            <p><strong>Av:</strong> {{ product.author }}</p>
             <p class="mt-4">{{ product.short_description }}</p>
         </div>
     </div>
@@ -50,8 +56,6 @@
 
                 <!-- Card Body -->
                 <div class="card-body text-center">
-                    <h3 class="card-title sub-heading-color">{{ product.title }}</h3>
-                    <p><strong>Av:</strong> {{ product.author }}</p>
                     <p class="card-text">{{ product.description }}</p>
                     <p class="card-text"><strong>Pris: </strong>{{ product.price }} kr</p>
 
