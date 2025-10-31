@@ -75,7 +75,6 @@
         {% endblock %}
     </main>
     <!-- Footer / contact section -->
-    <!-- mt-auto added to push footer to the bottom of the page -->
     <footer id="contact" class="mt-auto">
         <div class="container section">
             <div class="row">
@@ -84,42 +83,52 @@
                 </div>
             </div>
             <div class="row justify-content-center">
-                <!-- Social Media Links (Bottom on small screens) -->
+                <!-- Social Media Links -->
                 <div class="col-12 col-md-4 text-center text-md-start mb-4 order-last order-md-first">
                     <h3 class="sub-heading-color text-center">Hitta oss på sociala medier</h3>
                     <div class="social-links my-4">
-                        <a href="https://www.instagram.com" target="_blank"
-                            aria-label="Visit our Instagram page (opens in a new tab)" rel="noopener">
+                        <a href="https://www.instagram.com" target="_blank" aria-label="Visit our Instagram page"
+                            rel="noopener">
                             <i class="fa-brands fa-instagram"></i>
                         </a>
-                        <a href="https://www.facebook.com" target="_blank"
-                            aria-label="Visit our Facebook page (opens in a new tab)" rel="noopener">
+                        <a href="https://www.facebook.com" target="_blank" aria-label="Visit our Facebook page"
+                            rel="noopener">
                             <i class="fa-brands fa-square-facebook"></i>
                         </a>
                     </div>
                 </div>
-                <!-- Name & Email Fields (Top on small screens) -->
-                <div class="col-12 col-md-4 text-center mt-3">
+
+                <!-- Contact Form -->
+                <div class="col-12 col-md-8 mt-1">
                     <form action="{% url 'footer_contact' %}" method="POST">
                         {% csrf_token %}
                         <div class="row justify-content-center">
-                            <div class="col-10 col-md-10 mb-3">
-                                <input class="form-control" id="name" name="name" type="text" required>
-                                <label class="form-label sub-heading-color mt-1" for="name">Ditt Namn</label>
+                            <!-- Left column: name + email -->
+                            <div class="col-12 col-md-6 mt-lg-5 mt-md-5">
+                                <div class="mb-3">
+                                    <input class="form-control" id="name" name="name" type="text" required>
+                                    <label class="form-label sub-heading-color mt-1" for="name">Ditt Namn</label>
+                                </div>
+                                <div class="mb-3">
+                                    <input class="form-control" id="email-footer" name="email" type="email" required>
+                                    <label class="form-label sub-heading-color mt-1" for="email-footer">E-post</label>
+                                </div>
                             </div>
-                            <div class="col-10 col-md-10 mb-3">
-                                <input class="form-control" id="email-footer" name="email" type="email" required>
-                                <label class="form-label sub-heading-color mt-1" for="email-footer">E-post</label>
+
+                            <!-- Right column: message -->
+                            <div class="col-12 col-md-6">
+                                <div class="mb-3 h-100">
+                                    <textarea class="form-control h-100" id="message-footer" name="message" rows="5"
+                                        required></textarea>
+                                    <label class="form-label sub-heading-color mt-1" for="message-footer">Ditt
+                                        Meddelande</label>
+                                </div>
                             </div>
-                            <div class="col-10 col-md-10 mb-2">
-                                <textarea class="form-control" id="message-footer" name="message" rows="5"
-                                    required></textarea>
-                                <label class="form-label sub-heading-color mt-1" for="message-footer">Ditt
-                                    Meddelande</label>
-                            </div>
-                            <div id="button-contact" class="text-center justify-content-center">
-                                <button type="submit" class="btn custom-button-outline mt-4">Skicka</button>
-                            </div>
+                        </div>
+
+                        <!-- Submit button -->
+                        <div id="button-contact" class="text-center justify-content-center">
+                            <button type="submit" class="btn custom-button-filled mt-5">Skicka</button>
                         </div>
                     </form>
                 </div>

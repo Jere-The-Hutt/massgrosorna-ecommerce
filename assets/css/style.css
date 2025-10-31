@@ -33,27 +33,21 @@ h1, h2, h3 {
 }
 
 /* Buttons */
-.custom-button-filled, 
+.custom-button-filled,
 #button-modal .custom-button-filled {
     border: 2px solid var(--secondary-color);
     background-color: var(--secondary-color);
     color: var(--secondary-color-light);
     padding-bottom: 5px;
-}
 
-.custom-button-filled:hover {
-    border: 2px solid var(--primary-color-light);
-    background-color: var(--primary-color-light);
-    color: var(--secondary-color-light);
-}
-
-.custom-button-filled:hover,
-.custom-button-filled:focus,
-.custom-button-filled:active {
-    border: 2px solid var(--primary-color-light) !important;
-    background-color: var(--primary-color-light) !important;
-    color: var(--secondary-color-light) !important;
-    box-shadow: none !important;
+    &:hover,
+    &:focus,
+    &:active {
+        border: 2px solid var(--primary-color-light) !important;
+        background-color: var(--primary-color-light) !important;
+        color: var(--secondary-color-light) !important;
+        box-shadow: none !important;
+    }
 }
 
 #button-modal .custom-button-filled {
