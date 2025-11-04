@@ -166,12 +166,31 @@ def footer_contact(request):
         email = request.POST.get('email')
         message = request.POST.get('message')
 
-        # Send the email
+        # Send email to site owner/admin
         send_mail(
             subject=f'New message from {name}',
-            message=message,
+            message=f'From: {name} <{email}>\n\nMessage:\n{message}',
             from_email=email,
-            recipient_list=['your@email.com'],
+            recipient_list=['hallu_huttunen@gmail.com'],
+            fail_silently=False,
+        )
+
+        # Send confirmation email to the user
+        confirmation_subject = "Tack för ditt meddelande!"
+        confirmation_message = (
+            f"Hej {name},\n\n"
+            "Tack för att du kontaktade oss!"
+            "Vi har tagit emot ditt meddelande och "
+            "kommer att återkomma till dig så snart som möjligt.\n\n"
+            "Med vänliga hälsningar,\n"
+            "MassGrosorna"
+        )
+
+        send_mail(
+            subject=confirmation_subject,
+            message=confirmation_message,
+            from_email='hallu_huttunen@gmail.com',
+            recipient_list=[email],
             fail_silently=False,
         )
 
