@@ -36,8 +36,11 @@
                 </tbody>
             </table>
             <p>Total: {{ total }} kr</p>
-            <form method="POST">{% csrf_token %}
-                <button type="submit">Proceed (placeholder)</button>
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" class="custom-button-filled">
+                    Betala med Stripe
+                </button>
             </form>
         </div>
     </section>

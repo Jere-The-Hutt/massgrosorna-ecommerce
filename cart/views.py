@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from decimal import Decimal
 from store.models import Product
+import stripe
+from django.conf import settings
+from django.urls import reverse
 
 
 # View cart page
@@ -132,10 +135,31 @@ def checkout(request):
         })
 
     if request.method == 'POST':
-        # Placeholder for Stripe checkout
-        # For now, clear the cart and redirect to success
-        request.session['cart'] = {}
-        return redirect('success')
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+
+        line_items = []
+        for item in products:
+            line_items.append({
+                'price_data': {
+                    'currency': 'sek',
+                    'product_data': {
+                        'name': item['product'].title,
+                    },
+                    'unit_amount': int(item['product'].price * 100),  # Stripe wants price in cents/öre
+                },
+                'quantity': item['quantity'],
+            })
+
+        session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=line_items,
+            mode='payment',
+            success_url=request.build_absolute_uri(reverse('success')),
+            cancel_url=request.build_absolute_uri(reverse('cart')),
+        )
+
+        # Redirect to Stripe Checkout
+        return redirect(session.url, code=303)
 
     return render(
         request,

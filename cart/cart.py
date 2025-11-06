@@ -1,5 +1,5 @@
 from decimal import Decimal
-from .models import Product
+from store.models import Product
 
 
 class Cart:
