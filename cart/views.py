@@ -156,6 +156,10 @@ def checkout(request):
             mode='payment',
             success_url=request.build_absolute_uri(reverse('success')),
             cancel_url=request.build_absolute_uri(reverse('cart')),
+            metadata={
+                "session_key": request.session.session_key or "",
+                "product_ids": ",".join([str(i['product'].id) for i in products]),
+            }
         )
 
         # Redirect to Stripe Checkout

@@ -1,5 +1,6 @@
 from django.urls import path, include
 from . import views
+from .webhook import stripe_webhook
 
 
 urlpatterns = [
@@ -18,4 +19,5 @@ urlpatterns = [
         ),
 
     path('cart/', include('cart.urls')),  # this handles the /cart/ prefix
+    path('stripe/webhook/', stripe_webhook, name='stripe_webhook'),
     ]
