@@ -111,20 +111,15 @@ def checkout(request):
     cart = request.session.get('cart', {})
 
     if not cart:
-        # If cart is empty, redirect to library
         return redirect('library')
 
     products = []
     total = Decimal('0.00')
 
-    # Loop through cart items
     for product_id_str, item_data in cart.items():
         product = get_object_or_404(Product, id=int(product_id_str))
-
-        # Extract quantity and price from the item data
         quantity = item_data.get('quantity', 0)
         price = Decimal(str(item_data.get('price', product.price)))
-
         subtotal = price * quantity
         total += subtotal
 
@@ -145,7 +140,7 @@ def checkout(request):
                     'product_data': {
                         'name': item['product'].title,
                     },
-                    'unit_amount': int(item['product'].price * 100),  # Stripe wants price in cents/öre
+                    'unit_amount': int(item['product'].price * 100),
                 },
                 'quantity': item['quantity'],
             })
@@ -156,13 +151,15 @@ def checkout(request):
             mode='payment',
             success_url=request.build_absolute_uri(reverse('success')),
             cancel_url=request.build_absolute_uri(reverse('cart')),
+            shipping_address_collection={
+                "allowed_countries": ["SE", "FI", "NO", "DK"],
+            },
             metadata={
                 "session_key": request.session.session_key or "",
                 "product_ids": ",".join([str(i['product'].id) for i in products]),
             }
         )
 
-        # Redirect to Stripe Checkout
         return redirect(session.url, code=303)
 
     return render(

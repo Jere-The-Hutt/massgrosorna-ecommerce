@@ -59,9 +59,10 @@ class Order(models.Model):
         blank=True
     )
 
-    product = models.ForeignKey(
-        Product,
-        on_delete=models.PROTECT
+    # Store multiple product IDs as comma-separated string: "3,7,12"
+    products = models.CharField(
+        max_length=255,
+        help_text="Comma-separated product IDs"
     )
 
     stripe_payment_intent = models.CharField(
@@ -81,7 +82,11 @@ class Order(models.Model):
         default='processing'
     )
 
+    shipping_name = models.CharField(max_length=200, blank=True, null=True)
+    shipping_email = models.EmailField(blank=True, null=True)
+    shipping_address = models.TextField(blank=True, null=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Order #{self.id} - {self.product.title}"
+        return f"Order #{self.id}"
