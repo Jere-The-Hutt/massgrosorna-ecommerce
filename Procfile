@@ -1,1 +1,1 @@
-web: gunicorn massgrosorna-ecommerce.wsgi
+web: gunicorn store.wsgi
