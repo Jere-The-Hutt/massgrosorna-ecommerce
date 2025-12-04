@@ -140,6 +140,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "assets"]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+# WhiteNoise storage (hashed filenames + caching)
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 # Media files (user-uploaded content)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
