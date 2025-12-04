@@ -27,7 +27,7 @@ class OrderAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('user', 'total_price', 'status', 'stripe_payment_intent', 
+            'fields': ('user', 'total_price', 'status', 'stripe_payment_intent',
                        'shipping_name', 'shipping_email', 'shipping_address', 'display_products')
         }),
     )
