@@ -80,13 +80,21 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# Default: SQLite for local development
 DATABASES = {
-    'default': dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
+
+# If DATABASE_URL exists (Heroku Postgres), override
+import os
+if os.environ.get("DATABASE_URL"):
+    DATABASES["default"] = dj_database_url.config(
         conn_max_age=600,
         ssl_require=True
     )
-}
 
 # Email configuration for development
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
