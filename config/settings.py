@@ -29,8 +29,9 @@ SECRET_KEY = config('SECRET_KEY', default='your-default-dev-key')
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    '.herokuapp.com',
+    'massgrosorna-ecommerce-bf54d38f46a9.herokuapp.com',
     '127.0.0.1',
+    'localhost',
 ]
 
 
@@ -90,7 +91,6 @@ DATABASES = {
 }
 
 # If DATABASE_URL exists (Heroku Postgres), override
-import os
 if os.environ.get("DATABASE_URL"):
     DATABASES["default"] = dj_database_url.config(
         conn_max_age=600,
