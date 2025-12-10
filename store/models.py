@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary_storage.storage import MediaCloudinaryStorage
 
 
 # Optional Category model (future-proof)
@@ -27,16 +28,19 @@ class Product(models.Model):
         )
     image1 = models.ImageField(
         upload_to='products/',
+        storage=MediaCloudinaryStorage(),
         blank=True,
         null=True
         )
     image2 = models.ImageField(
         upload_to='products/',
+        storage=MediaCloudinaryStorage(),
         blank=True,
         null=True
         )
     image3 = models.ImageField(
         upload_to='products/',
+        storage=MediaCloudinaryStorage(),
         blank=True,
         null=True
         )
